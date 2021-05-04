@@ -30,18 +30,11 @@ class FollowingController extends Controller
 
     public function index()
     {
-
-
         $user = Auth::user();
         $id = $user->id;
-
         $user = User::find($id);
-        $data = $user->followees()->get()->pluck('id')->toArray();
-        $listpost = Post::whereHas('user', function($subQ) use ($data) {
-            $subQ->whereIn('id', $data);
-        })->paginate(4);
-
+        $posts = $this->postRepository->getPostFollowing($id);
         $user_get = $this->userRepository->get($id);
-        return view('user.following', compact('user_get', 'listpost'));
+        return view('user.following', compact('user_get', 'posts'));
     }
 }

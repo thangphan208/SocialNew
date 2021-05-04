@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(  self::class, 'follows', 'followee_id', 'follower_id');
     }
+
     public function followees()
     {
         return $this->belongsToMany( self::class, 'follows',  'follower_id', 'followee_id');

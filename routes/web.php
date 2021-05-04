@@ -20,27 +20,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 Route::get('login', 'User\LoginController@showLoginForm')->name('login');
 
 
 Route::namespace('User')->group(function () {
-    Route::get('/user/login', 'LoginController@showLoginForm');
-    Route::post('/user/login', 'LoginController@login')->name('user.login');
+    Route::prefix('user')->group(function () {
+        Route::get('login', 'LoginController@showLoginForm');
+        Route::post('login', 'LoginController@login')->name('user.login');
+        Route::get('logout', 'LoginController@logout')->name('user.logout');
+        Route::get('register', 'RegisterController@index');
+        Route::post('register', 'RegisterController@create')->name('user.register');
+    });
 
     //middleware check logged to login this pages
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('/user/home', 'HomeController@index');
-        Route::get('/user/following', 'FollowingController@index');
-        Route::get('/user/detail', 'UserDetailController@index')->name('user.detail');
+        Route::prefix('user')->group(function () {
+            Route::get('home', 'HomeController@index');
+            Route::get('following', 'FollowingController@index');
 
-        Route::get('/user/detail/{id}', 'UserDetailController@show')->name('user.detail.show');
-        //update follow
-        Route::get('/user/detail/follow/{id}', 'UserDetailController@update_follow')->name('user.detail.follow');
+            Route::get('detail/{id}', 'UserController@show')->name('showUserDetail');
+            //update follow
+            Route::get('detail/follow/{id}', 'UserController@updateFollower')->name('user.detail.follow');
+        });
     });
-    Route::get('/user/logout', 'LoginController@logout')->name('user.logout');
-
-    Route::get('/user/register', 'RegisterController@index');
-    Route::post('/user/register', 'RegisterController@create')->name('user.register');
 });

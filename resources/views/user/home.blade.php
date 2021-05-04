@@ -51,13 +51,13 @@
             <div class="row">
                 <div class="col">
                     <div class="user__infor mt-3">
-                        <a href="/user/detail" style="display: flex; text-decoration: none">
+                        <a href="{{ route('showUserDetail', ['id' => $user->id]) }}"
+                            style="display: flex; text-decoration: none">
                             <div class="user__infor-Image">
-                                <img src="{{$user_get->avatar}}"
-                                    alt="" style="margin: 5px">
+                                <img src="{{ $user->avatar }}" alt="" style="margin: 5px">
                             </div>
                             <div class="user__infor-Name">
-                                 {{$user_get->name}}
+                                {{ $user->name }}
                             </div>
                         </a>
 
@@ -69,17 +69,16 @@
                     </ul>
                     <h3>List user</h3>
                     <ul class="list-group mt-5">
-                        @foreach ($user_list as $user)
-                        <li class="list-group-item"><a href="/user/detail/{{$user->id}}"
-                            style="display: flex; text-decoration: none">
-                            <div class="user__infor-Image">
-                                <img src="{{$user->avatar}}"
-                                    alt="" style="margin: 5px">
-                            </div>
-                            <div class="user__infor-Name">
-                                 {{$user->name}}
-                            </div>
-                        </a></li>
+                        @foreach ($users as $user)
+                            <li class="list-group-item"><a href="{{ route('showUserDetail', ['id' => $user->id]) }}"
+                                    style="display: flex; text-decoration: none">
+                                    <div class="user__infor-Image">
+                                        <img src="{{ $user->avatar }}" alt="" style="margin: 5px">
+                                    </div>
+                                    <div class="user__infor-Name">
+                                        {{ $user->name }}
+                                    </div>
+                                </a></li>
                         @endforeach
 
                     </ul>
@@ -97,7 +96,7 @@
                         </div>
 
                         <div class="list__post">
-                            @foreach ($listpost as $post)
+                            @foreach ($posts as $post)
                                 <div class="card">
                                     <h2>This is id : {{ $post->id }}</h2>
                                     <h5>{{ $post->created_at }}</h5>
@@ -105,11 +104,10 @@
                                         <img src="{{ $post->image }}" style="height:200px;" alt="">
                                     </div>
                                     <p>Some text..</p>
-                                    {{-- <p>{{ $post->description }}</p> --}}
                                 </div>
                             @endforeach
                         </div>
-                        {{ $listpost->links()}}
+                        {{ $posts->links() }}
                     </div>
                 </div>
                 <div class="col">

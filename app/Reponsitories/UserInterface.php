@@ -1,7 +1,12 @@
 <?php
+
 namespace App\Reponsitories;
 
-interface UserInterface{
+use PhpParser\Builder\Function_;
+use PhpParser\Node\Expr\FuncCall;
+
+interface UserInterface
+{
 
 
     public function all();
@@ -14,7 +19,11 @@ interface UserInterface{
 
     public function delete($id);
 
+    public function getFolloweesByID($id);
 
+    public function getFollowerByID($id);
 
+    public function insertFollower($followerId);
 
+    public function deleteFollower($followerId);
 }

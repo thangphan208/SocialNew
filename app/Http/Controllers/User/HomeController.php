@@ -8,6 +8,7 @@ use App\Reponsitories\PostInterface;
 use App\Reponsitories\UserInterface;
 use App\Models\User;
 use App\Models\Post;
+
 class HomeController extends Controller
 {
     /**
@@ -30,12 +31,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $id = $user->id;
 
-        $user_get = $this->userRepository->get($id);
-        $user_list = $this->userRepository->all();
-        $listpost = $this->postRepository->all();
-        return view('user.home', compact('user_get', 'listpost','user_list'));
+        $user = $this->userRepository->get(Auth::user()->id);
+        $users = $this->userRepository->all();
+        $posts = $this->postRepository->all();
+        return view('user.home', compact('user', 'posts', 'users'));
     }
 }

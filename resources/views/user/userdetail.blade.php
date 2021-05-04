@@ -140,7 +140,7 @@
                 </div>
                 <div class="col-8 mt-5">
                     <div class="list__post">
-                        @foreach ($listpost as $post)
+                        @foreach ($posts as $post)
                             <div class="card">
                                 <h2>This is id : {{ $post->id }}</h2>
                                 <h5>{{ $post->created_at }}</h5>
@@ -160,5 +160,4 @@
 
     </div>
 </body>
-
 </html>

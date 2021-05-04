@@ -15,9 +15,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/logout">Logout</a>
                     </li>
-
                 </ul>
-
             </div>
         </div>
     </nav>

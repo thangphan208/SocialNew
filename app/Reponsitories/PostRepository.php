@@ -7,6 +7,7 @@ use App\Models;
 use App\Models\Post;
 use Illuminate\Contracts\Pagination\Paginator;
 use App\Models\User;
+
 class PostRepository implements PostInterface
 {
     public function all()
@@ -16,7 +17,6 @@ class PostRepository implements PostInterface
 
     public function get($id)
     {
-
     }
 
     public function store(array $data)
@@ -31,25 +31,20 @@ class PostRepository implements PostInterface
     {
     }
 
-    public function get_post_user($user_id){
+    public function getPostByUser($userId)
+    {
         $post = new Post();
-        $listpost = $post->where('user_id', $user_id)->paginate(3);
+        $listpost = $post->where('user_id', $userId)->paginate(3);
         return $listpost;
     }
 
-    public function get_post_Following($id)
+    public function getPostFollowing($userId)
     {
-        // $post = new Post();
-        // $data = $post::select('SELECT * FROM user_following uf INNER JOIN post p
-        //  ON uf.user_id_following = p.user_id WHERE uf.user_id=?', [$id]);
-
-        // $arrayFollowingIds = $auth->followings()->select('id')->get()->pluck('id')->toArray();
-
-
-        // $query = Post::whereHas('user', function($subQ) use ($arrayFollowingIds) {
-        //     $subQ->whereIn('id', $arrayFollowingIds);
-        // });
-
-        // return $data;
+        $user = User::find($userId);
+        $data = $user->followees()->get()->pluck('id')->toArray();
+        $listpost = Post::whereHas('user', function ($subQ) use ($data) {
+            $subQ->whereIn('id', $data);
+        })->paginate(4);
+        return $listpost;
     }
 }
