@@ -9,11 +9,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/user/home">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/user/home">{{__('language.Home')}}</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/logout">Logout</a>
+                        <a class="nav-link" href="/user/logout">{{__('language.Logout')}}</a>
                     </li>
                 </ul>
             </div>

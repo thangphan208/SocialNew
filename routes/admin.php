@@ -17,12 +17,15 @@ Route::namespace('Admin')->group(function () {
 
     //middleware check logged to login this pages
     Route::group(['middleware' => ['auth:admin']], function () {
-        Route::get('/manager',  'AdminManagerController@index');
-        Route::get('/home', 'HomeController@index');
+        Route::get('/manager',  'AdminController@index');
+        Route::get('/home', 'AdminController@index')->name('admin.home');
+        //delete admin
+        Route::get('/delete/{id}', 'AdminController@destroy')->name('admin.destroy');
+        //update admin
+        Route::get('/edit/{id}', 'AdminController@edit')->name('admin.edit');
     });
-    Route::get('/logout','LoginController@logout')->name('admin.logout');
+    Route::get('/logout', 'LoginController@logout')->name('admin.logout');
 
     Route::get('register', 'RegisterController@index');
     Route::post('register', 'RegisterController@create')->name('admin.register');
-
 });

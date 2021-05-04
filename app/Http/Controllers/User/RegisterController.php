@@ -1,16 +1,30 @@
 <?php
 
 namespace App\Http\Controllers\User;
+
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use App\Reponsitories\UserInterface;
 use Illuminate\Support\Facades\Mail;
 use app\Mail\SendEmail;
+use Illuminate\Support\Arr;
 
 class RegisterController extends Controller
 {
+
+    private $postRepository;
+    private $userRepository;
+
+    public function __construct(
+        UserInterface $userRepository
+    ) {
+        $this->userRepository = $userRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -28,14 +42,20 @@ class RegisterController extends Controller
      */
     public function create(Request $request)
     {
-        // create user
-        $params = $request->only('name', 'email', 'password');
-        $params['password'] = Hash::make($params['password']);
-        $u = User::create($params);
 
-        return view('user.login');
-        // send email
-        // Mail::to($u)->send(new SendEmail($params));
+        if ($request->hasFile('file')) {
+            $request->file->move("img\avt", $request->file->getClientOriginalName());
+            $data = array(
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'avatar' => $request->file->getClientOriginalName()
+            );
+            $this->userRepository->store($data);
+            return redirect('user/login');
+        } else {
+            return redirect('user/register');
+        }
     }
 
     /**

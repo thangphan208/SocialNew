@@ -2,10 +2,9 @@
 <html>
 
 <head>
-    <title></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <title>Document</title>
+    <title>{{ __('language.home_page_title') }}</title>
     <style>
         * {
             margin: 0px;
@@ -139,7 +138,7 @@
                         <a href="{{ route('showUserDetail', ['id' => $user->id]) }}"
                             style="display: flex; text-decoration: none">
                             <div class="user__infor-Image">
-                                <img src="{{ $user->avatar }}" alt="" style="margin: 5px">
+                                <img src="\img\avt\{{ $user->avatar }}" alt="" style="margin: 5px">
                             </div>
                             <div class="user__infor-Name">
                                 {{ $user->name }}
@@ -147,8 +146,10 @@
                         </a>
                     </div>
                     <ul class="list-group mt-5">
-                        <li class="list-group-item"><a href="{{ route('followingPage') }}">Following</a></li>
-                        <li class="list-group-item"><a href="{{ route('homePage') }}">All post</a></li>
+                        <li class="list-group-item"><a
+                                href="{{ route('followingPage') }}">{{ __('language.Following') }}</a></li>
+                        <li class="list-group-item"><a
+                                href="{{ route('homePage') }}">{{ __('language.All post') }}</a></li>
                     </ul>
                     <h3>List user</h3>
                     <ul class="list-group mt-5">
@@ -167,23 +168,27 @@
                 </div>
                 <div class="col-6">
                     <div class="post">
-                        <p>New post</p>
-                        <div id="postboxpos" class="post">
-                            <textarea placeholder="What's in your mind" id="postbox">
-                        </textarea>
-                        </div>
-                        <div id="postpos" class="post">
-                            <input type="submit" id="buttonpost" value="post" />
-                        </div>
+                        <p>{{ __('language.New post') }}</p>
+                        <form action="{{ route('user.post.new') }}" method="post" enctype="multipart/form-data">
+                            <div id="postboxpos" class="post">
+                                <textarea name="description" placeholder="What's in your mind" id="postbox">
+                                </textarea>
+                            </div>
+                            <div id="postpos" class="post">
+                                <input type="file" name="file" />
+                            </div>
+                            <div id="postpos" class="post">
+                                <input type="submit" id="buttonpost" value="{{ __('language.post') }}" />
+                            </div>
+                        </form>
                         <div class="list__post">
                             @foreach ($posts as $post)
                                 <div class="card">
-                                    <h2>This is id : {{ $post->id }}</h2>
+                                    <h2>{{ $post->id }}</h2>
                                     <h5>{{ $post->created_at }}</h5>
                                     <div class="fakeimg" style="height:200px;">
                                         <img src="{{ $post->image }}" style="height:200px;" alt="">
                                     </div>
-                                    <p>Some text..</p>
                                 </div>
                             @endforeach
                         </div>

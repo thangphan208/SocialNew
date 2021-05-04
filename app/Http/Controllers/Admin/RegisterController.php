@@ -26,10 +26,9 @@ class RegisterController extends Controller
      */
     public function create(Request $request)
     {
-        $params = $request->only('name', 'email', 'password');
-        $params['password'] = Hash::make($params['password']);
-        $u = Admin::create($params);
-
+        $data = $request->only('name', 'email', 'password');
+        $data['password'] = Hash::make($data['password']);
+        Admin::create($data);
         return view('admin.login');
     }
 

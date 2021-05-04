@@ -3,12 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Reponsitories\AdminRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminManagerController extends Controller
+class AdminController extends Controller
 {
+
+    private $AdminRepository;
+
+    public function __construct(AdminRepository $AdminRepository)
+    {
+        $this->middleware('auth');
+        $this->AdminRepository = $AdminRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +26,8 @@ class AdminManagerController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $admin = new Admin();
-        $listadmin = $admin::all()->toArray();
-
-        return view('admin.manager', compact('user', 'listadmin'));
+        $admins = $this->AdminRepository->all();
+        return view('admin.home', compact('user', 'admins'));
     }
 
     /**
@@ -63,7 +70,7 @@ class AdminManagerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user   = $this->AdminRepository->get($id);
     }
 
     /**
@@ -87,10 +94,5 @@ class AdminManagerController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
     }
 }

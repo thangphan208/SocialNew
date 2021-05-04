@@ -184,7 +184,7 @@
         </section>
         <div class="user__profile">
             <div class="user-pro-img">
-                <img src="{{ $user->avatar }}" alt="">
+                <img src="\img\avt\{{ $user->avatar }}" alt="">
                 <div class="add-dp" id="OpenImgUpload">
                     <label for="file"><i class="fas fa-camera"></i></label>
                 </div>
