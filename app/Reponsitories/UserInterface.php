@@ -23,7 +23,7 @@ interface UserInterface
 
     public function getFollowerByID($id);
 
-    public function insertFollower($followerId);
+    public function insertFollower($followerId, $userIdLogged);
 
-    public function deleteFollower($followerId);
+    public function deleteFollower($followerId, $userIdLogged);
 }

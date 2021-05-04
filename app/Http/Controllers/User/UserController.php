@@ -64,7 +64,7 @@ class UserController extends Controller
 
     public function updateFollower($id)
     {
-        $this->userRepository->insertFollower($id);
+        $this->userRepository->insertFollower($id, Auth::user()->id);
         return back();
     }
 
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $this->userRepository->deleteFollower($id);
+        $this->userRepository->deleteFollower($id, Auth::user()->id);
         return back();
     }
 }

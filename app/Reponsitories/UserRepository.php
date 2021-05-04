@@ -47,13 +47,13 @@ class UserRepository implements UserInterface
         return $user->followees()->get()->pluck('id')->toArray();
     }
 
-    public function insertFollower($followerId)
+    public function insertFollower($followerId, $userIdLogged)
     {
-        User::find(Auth::user()->id)->followers()->attach($followerId);
+        User::find($userIdLogged)->followers()->attach($followerId);
     }
 
-    public function deleteFollower($followerId)
+    public function deleteFollower($followerId, $userIdLogged)
     {
-        User::find(Auth::user()->id)->followers()->detach($followerId);
+        User::find($userIdLogged)->followers()->detach($followerId);
     }
 }

@@ -31,7 +31,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
         $user = $this->userRepository->get(Auth::user()->id);
         $users = $this->userRepository->all();
         $posts = $this->postRepository->all();
