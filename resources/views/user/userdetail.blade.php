@@ -91,7 +91,6 @@
                 <div class="container">
                     <div class="row no-gutters">
                         <div class="col-lg-12 col-sm-12">
-                            {{-- <input type="file" id="file"> --}}
                             <label for="file" class="file-change">Change Image</label>
                         </div>
                     </div>
@@ -101,9 +100,7 @@
         <div class="user__profile">
             <div class="user-pro-img">
                 <img src="{{ $user->avatar }}" alt="">
-
                 <div class="add-dp" id="OpenImgUpload">
-                    {{-- <input type="file" id="file"> --}}
                     <label for="file"><i class="fas fa-camera"></i></label>
                 </div>
                 <div>{{ $user->name }}</div>
@@ -119,12 +116,18 @@
                         </tr>
                     </table>
                 </div>
-                @if (!$check)
-                    <a href="/user/detail/follow/{{ $user->id }}">
-                        <button>Follow</button>
-                    </a>
+                @if ($user->id == Auth::user()->id)
+                @else
+                    @if (!$check)
+                        <a href="{{ route('updateFollow', ['id' => $user->id]) }}">
+                            <button>Follow</button>
+                        </a>
+                    @else
+                        <a href="{{ route('unFollow', ['id' => $user->id]) }}">
+                            <button>Un-Follow</button>
+                        </a>
+                    @endif
                 @endif
-
             </div>
         </div>
         <div class="profile__main">
@@ -151,13 +154,12 @@
                                 <p>{{ $post->description }}</p>
                             </div>
                         @endforeach
-                        {{-- {{ $listpost->links() }} --}}
                     </div>
                 </div>
 
             </div>
         </div>
-
     </div>
 </body>
+
 </html>

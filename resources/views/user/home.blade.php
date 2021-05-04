@@ -60,12 +60,10 @@
                                 {{ $user->name }}
                             </div>
                         </a>
-
                     </div>
-
                     <ul class="list-group mt-5">
-                        <li class="list-group-item"><a href="/user/following">Following</a></li>
-                        <li class="list-group-item"><a href="/user/home">All post</a></li>
+                        <li class="list-group-item"><a href="{{ route('followingPage') }}">Following</a></li>
+                        <li class="list-group-item"><a href="{{ route('homePage') }}">All post</a></li>
                     </ul>
                     <h3>List user</h3>
                     <ul class="list-group mt-5">
@@ -80,9 +78,7 @@
                                     </div>
                                 </a></li>
                         @endforeach
-
                     </ul>
-
                 </div>
                 <div class="col-6">
                     <div class="post">
@@ -94,7 +90,6 @@
                         <div id="postpos" class="post">
                             <input type="submit" id="buttonpost" value="post" />
                         </div>
-
                         <div class="list__post">
                             @foreach ($posts as $post)
                                 <div class="card">
@@ -111,7 +106,6 @@
                     </div>
                 </div>
                 <div class="col">
-
                 </div>
             </div>
         </div>

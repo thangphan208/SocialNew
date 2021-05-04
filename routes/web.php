@@ -36,12 +36,12 @@ Route::namespace('User')->group(function () {
     //middleware check logged to login this pages
     Route::group(['middleware' => ['auth']], function () {
         Route::prefix('user')->group(function () {
-            Route::get('home', 'HomeController@index');
-            Route::get('following', 'FollowingController@index');
-
+            Route::get('home', 'HomeController@index')->name('homePage');
+            Route::get('following', 'FollowingController@index')->name('followingPage');
             Route::get('detail/{id}', 'UserController@show')->name('showUserDetail');
             //update follow
-            Route::get('detail/follow/{id}', 'UserController@updateFollower')->name('user.detail.follow');
+            Route::get('detail/follow/{id}', 'UserController@updateFollower')->name('updateFollow');
+            Route::get('detail/unfollow/{id}', 'UserController@unFollow')->name('unFollow');
         });
     });
 });

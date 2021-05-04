@@ -62,12 +62,10 @@
                         </a>
 
                     </div>
-
                     <ul class="list-group mt-5">
                         <li class="list-group-item"><a href="/user/following">Following</a></li>
                         <li class="list-group-item"><a href="/user/home">All post</a></li>
                     </ul>
-
                 </div>
                 <div class="col-6">
                     <div class="post">
@@ -79,7 +77,6 @@
                         <div id="postpos" class="post">
                             <input type="submit" id="buttonpost" value="post" />
                         </div>
-
                         <div class="list__post">
                             @foreach ($posts as $post)
                                 <div class="card">
@@ -89,7 +86,6 @@
                                         <img src="{{ $post->image }}" style="height:200px;" alt="">
                                     </div>
                                     <p>Some text..</p>
-                                    {{-- <p>{{ $post->description }}</p> --}}
                                 </div>
                             @endforeach
                         </div>
