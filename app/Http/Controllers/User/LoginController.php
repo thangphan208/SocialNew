@@ -12,6 +12,11 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
+
+    public function showLoginForm()
+    {
+        return view('user.login');
+    }
     /**
      * Where to redirect users after login.
      *
@@ -25,14 +30,10 @@ class LoginController extends Controller
      * @return void
      */
 
+
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-    }
-
-    public function index()
-    {
-        return view('user.login');
+        $this->middleware('guest:api')->except('logout');
     }
 
     public function logout(Request $request)
@@ -51,5 +52,7 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect('/user/login');
     }
+
+
 
 }

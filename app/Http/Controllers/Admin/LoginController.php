@@ -6,7 +6,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\JsonResponse;
 class LoginController extends Controller
 {
     /*
@@ -50,13 +50,24 @@ class LoginController extends Controller
         return view('admin.login');
     }
 
-    public function login(Request $request){
-        $credentials = $request->only('email', 'password');
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return view('admin.home');
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
         }
-        return view('admin.login');
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('admin/login');
     }
+
+
+
+
 }

@@ -8,7 +8,7 @@ use App\Reponsitories\PostInterface;
 use App\Reponsitories\UserInterface;
 use App\Models\User;
 use App\Models\Post;
-class HomeController extends Controller
+class FollowingController extends Controller
 {
     /**
      * Show the application dashboard.
@@ -30,20 +30,18 @@ class HomeController extends Controller
 
     public function index()
     {
+
+
         $user = Auth::user();
         $id = $user->id;
 
+        $user = User::find($id);
+        $data = $user->followers()->get()->pluck('id')->toArray();
+        $listpost = Post::whereHas('user', function($subQ) use ($data) {
+            $subQ->whereIn('id', $data);
+        })->paginate(4);
+
         $user_get = $this->userRepository->get($id);
-        $user_list = $this->userRepository->all();
-        $listpost = $this->postRepository->all();
-        return view('user.home', compact('user_get', 'listpost','user_list'));
-
-
-
-
-
-
-
-
+        return view('user.following', compact('user_get', 'listpost'));
     }
 }

@@ -1,49 +1,49 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0px;
-        }
+        <style>
+            * {
+                margin: 0px;
+            }
 
-        .row {
-            margin: 0px;
-        }
+            .row {
+                margin: 0px;
+            }
 
-        .user__infor {
-            box-sizing: border-box;
-            display: flex;
-            text-align: center;
+            .user__infor {
+                box-sizing: border-box;
+                display: flex;
+                text-align: center;
 
-        }
+            }
 
-        .user__infor-Image img {
-            width: 50px;
-        }
+            .user__infor-Image img {
+                width: 50px;
+            }
 
-        .user__infor-Name p {
-            display: inline;
-            justify-content: center;
-            margin-left: 10px;
-        }
+            .user__infor-Name p {
+                display: inline;
+                justify-content: center;
+                margin-left: 10px;
+            }
 
-        .post {
-            background-color: aquamarine;
-        }
+            .post {
+                background-color: aquamarine;
+            }
 
-        #postboxpos textarea {
-            width: 500px;
-            margin: 0 auto;
-        }
+            #postboxpos textarea {
+                width: 500px;
+                margin: 0 auto;
+            }
 
-    </style>
+        </style>
 </head>
-
 <body>
     @include('header')
     <div class="container">
@@ -66,22 +66,6 @@
                     <ul class="list-group mt-5">
                         <li class="list-group-item"><a href="/user/following">Following</a></li>
                         <li class="list-group-item"><a href="/user/home">All post</a></li>
-                    </ul>
-                    <h3>List user</h3>
-                    <ul class="list-group mt-5">
-                        @foreach ($user_list as $user)
-                        <li class="list-group-item"><a href="/user/detail/{{$user->id}}"
-                            style="display: flex; text-decoration: none">
-                            <div class="user__infor-Image">
-                                <img src="{{$user->avatar}}"
-                                    alt="" style="margin: 5px">
-                            </div>
-                            <div class="user__infor-Name">
-                                 {{$user->name}}
-                            </div>
-                        </a></li>
-                        @endforeach
-
                     </ul>
 
                 </div>
@@ -109,7 +93,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        {{ $listpost->links()}}
+                        {{ $listpost->links() }}
                     </div>
                 </div>
                 <div class="col">
@@ -119,5 +103,4 @@
         </div>
     </div>
 </body>
-
 </html>

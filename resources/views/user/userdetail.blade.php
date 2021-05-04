@@ -100,25 +100,30 @@
         </section>
         <div class="user__profile">
             <div class="user-pro-img">
-                <img src="{{$user->avatar}}" alt="">
+                <img src="{{ $user->avatar }}" alt="">
 
                 <div class="add-dp" id="OpenImgUpload">
                     {{-- <input type="file" id="file"> --}}
                     <label for="file"><i class="fas fa-camera"></i></label>
                 </div>
-                <div>{{$user->name}}</div>
+                <div>{{ $user->name }}</div>
                 <div class="number-follow">
                     <table>
                         <tr>
-                            <td class="item-fl">Following</td>
                             <td class="item-fl">Followers</td>
+                            <td class="item-fl">Followes</td>
                         </tr>
                         <tr>
-                            <td class="item-fl">100</td>
-                            <td class="item-fl">250</td>
+                            <td class="item-fl">{{ $numFollowers }}</td>
+                            <td class="item-fl">{{ $numFollowees }}</td>
                         </tr>
                     </table>
                 </div>
+                @if (!$check)
+                    <a href="/user/detail/follow/{{ $user->id }}">
+                        <button>Follow</button>
+                    </a>
+                @endif
 
             </div>
         </div>
@@ -127,7 +132,7 @@
                 <div class="col">
                     <ul class="list-group mt-5">
                         <li class="list-group-item" style="font-weight: bold">Information</li>
-                        <li class="list-group-item">Email : {{$user->email}}</li>
+                        <li class="list-group-item">Email : {{ $user->email }}</li>
                         <li class="list-group-item">Date of birth :27/09/2000</li>
                         <li class="list-group-item">Gender : male</li>
                         <li class="list-group-item">Address : Ha noi -Viet Nam</li>
@@ -136,17 +141,17 @@
                 <div class="col-8 mt-5">
                     <div class="list__post">
                         @foreach ($listpost as $post)
-                        <div class="card">
-                            <h2>This is id : {{ $post->id }}</h2>
-                            <h5>{{ $post->created_at }}</h5>
-                            <div class="fakeimg" style="height:200px;">
-                                <img src="{{ $post->image }}" style="height:200px;" alt="">
+                            <div class="card">
+                                <h2>This is id : {{ $post->id }}</h2>
+                                <h5>{{ $post->created_at }}</h5>
+                                <div class="fakeimg" style="height:200px;">
+                                    <img src="{{ $post->image }}" style="height:200px;" alt="">
+                                </div>
+                                <p>Some text..</p>
+                                <p>{{ $post->description }}</p>
                             </div>
-                            <p>Some text..</p>
-                            <p>{{ $post->description }}</p>
-                        </div>
-                    @endforeach
-                        {{ $listpost->links() }}
+                        @endforeach
+                        {{-- {{ $listpost->links() }} --}}
                     </div>
                 </div>
 

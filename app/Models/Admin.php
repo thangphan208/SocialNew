@@ -10,6 +10,8 @@ class Admin extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    protected $table  = 'admins';
+
     protected $guard = 'admin';
 
     protected $fillable = [
