@@ -23,7 +23,7 @@ class UserDetailController extends Controller
     public function __construct(
         PostInterface $postRepository,
         UserInterface $userRepository,
-        User_FollowingRepositoryInterface $user_FollowingRepository,
+        User_FollowingRepositoryInterface $user_FollowingRepository
     ) {
         $this->postRepository = $postRepository;
         $this->userRepository = $userRepository;
