@@ -8,14 +8,9 @@
 </head>
 
 <body>
-    {{-- Login success {{ auth('admin')->user()->name }} --}}
-
-    <!-- As a link -->
     <div class="container">
         <h1>This is home page</h1>
     </div>
-
-
 </body>
 
 </html>

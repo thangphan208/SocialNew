@@ -78,6 +78,91 @@
             margin: 15px;
         }
 
+        .lang-menu {
+            width: 100px;
+            text-align: right;
+            font-weight: bold;
+            margin-top: 25px;
+            position: relative;
+        }
+
+        .lang-menu .selected-lang {
+            display: flex;
+            justify-content: space-between;
+            line-height: 2;
+            cursor: pointer;
+        }
+
+        .lang-menu .selected-lang:before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-image: url(https://www.countryflags.io/us/flat/32.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .lang-menu ul {
+            margin: 0;
+            padding: 0;
+            display: none;
+            background-color: #fff;
+            border: 1px solid #f8f8f8;
+            position: absolute;
+            top: 45px;
+            right: 0px;
+            width: 125px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .lang-menu ul li {
+            list-style: none;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lang-menu ul li a {
+            text-decoration: none;
+            width: 125px;
+            padding: 5px 10px;
+            display: block;
+        }
+
+        .lang-menu ul li:hover {
+            background-color: #f2f2f2;
+        }
+
+        .lang-menu ul li a:before {
+            content: '';
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            vertical-align: middle;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+
+
+        .en:before {
+            background-image: url(https://www.countryflags.io/us/flat/32.png);
+        }
+
+
+        .vn:before {
+            background-image: url(https://www.countryflags.io/vn/flat/32.png);
+        }
+
+
+        .lang-menu:hover ul {
+            display: block;
+        }
+
     </style>
 </head>
 
@@ -91,7 +176,6 @@
                 <div class="container">
                     <div class="row no-gutters">
                         <div class="col-lg-12 col-sm-12">
-                            {{-- <input type="file" id="file"> --}}
                             <label for="file" class="file-change">Change Image</label>
                         </div>
                     </div>
@@ -101,9 +185,7 @@
         <div class="user__profile">
             <div class="user-pro-img">
                 <img src="{{ $user->avatar }}" alt="">
-
                 <div class="add-dp" id="OpenImgUpload">
-                    {{-- <input type="file" id="file"> --}}
                     <label for="file"><i class="fas fa-camera"></i></label>
                 </div>
                 <div>{{ $user->name }}</div>
@@ -119,12 +201,18 @@
                         </tr>
                     </table>
                 </div>
-                @if (!$check)
-                    <a href="/user/detail/follow/{{ $user->id }}">
-                        <button>Follow</button>
-                    </a>
+                @if ($user->id == Auth::user()->id)
+                @else
+                    @if (!$check)
+                        <a href="{{ route('updateFollow', ['id' => $user->id]) }}">
+                            <button>Follow</button>
+                        </a>
+                    @else
+                        <a href="{{ route('unFollow', ['id' => $user->id]) }}">
+                            <button>Un-Follow</button>
+                        </a>
+                    @endif
                 @endif
-
             </div>
         </div>
         <div class="profile__main">
@@ -140,7 +228,7 @@
                 </div>
                 <div class="col-8 mt-5">
                     <div class="list__post">
-                        @foreach ($listpost as $post)
+                        @foreach ($posts as $post)
                             <div class="card">
                                 <h2>This is id : {{ $post->id }}</h2>
                                 <h5>{{ $post->created_at }}</h5>
@@ -151,13 +239,11 @@
                                 <p>{{ $post->description }}</p>
                             </div>
                         @endforeach
-                        {{-- {{ $listpost->links() }} --}}
                     </div>
                 </div>
 
             </div>
         </div>
-
     </div>
 </body>
 

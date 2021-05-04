@@ -14,6 +14,7 @@ interface PostInterface
 
     public function delete($id);
 
-    public function get_post_Following($id);
-    public function get_post_user($user_id);
+    public function getPostByUser($user_id);
+
+    public function getPostFollowing($id);
 }
