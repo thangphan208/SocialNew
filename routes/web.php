@@ -45,3 +45,6 @@ Route::namespace('User')->group(function () {
         });
     });
 });
+
+
+Route::get('language/{language}',  'LanguageController@index')->name('language');
