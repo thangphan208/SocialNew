@@ -37,13 +37,5 @@ class HomeController extends Controller
         $user_list = $this->userRepository->all();
         $listpost = $this->postRepository->all();
         return view('user.home', compact('user_get', 'listpost','user_list'));
-
-
-
-
-
-
-
-
     }
 }

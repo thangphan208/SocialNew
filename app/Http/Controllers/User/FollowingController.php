@@ -36,7 +36,7 @@ class FollowingController extends Controller
         $id = $user->id;
 
         $user = User::find($id);
-        $data = $user->followers()->get()->pluck('id')->toArray();
+        $data = $user->followees()->get()->pluck('id')->toArray();
         $listpost = Post::whereHas('user', function($subQ) use ($data) {
             $subQ->whereIn('id', $data);
         })->paginate(4);
