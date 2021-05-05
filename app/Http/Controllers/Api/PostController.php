@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Services\PostService;
 
-use App\Reponsitories\UserInterface;
-
-class RegisterController extends Controller
+class PostController extends Controller
 {
+    protected $postservice;
 
-    private $postRepository;
-    private $userRepository;
-
-    public function __construct(
-        UserInterface $userRepository
-    ) {
-        $this->userRepository = $userRepository;
+    public function __construct(PostService $postservice)
+    {
+        $this->postService = $postservice;
     }
 
 
@@ -28,7 +23,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('user.register');
+        return $this->postService->all();
     }
 
     /**
@@ -36,22 +31,9 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-
-        if ($request->hasFile('file')) {
-            $request->file->move("img\avt", $request->file->getClientOriginalName());
-            $data = array(
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'avatar' => $request->file->getClientOriginalName()
-            );
-            $this->userRepository->store($data);
-            return redirect('user/login');
-        } else {
-            return redirect('user/register');
-        }
+        //
     }
 
     /**

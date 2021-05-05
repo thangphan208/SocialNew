@@ -54,3 +54,9 @@ Route::group(['middleware' => ['language']], function () {
 });
 
 Route::get('language/{language}',  'LanguageController@index')->name('language');
+
+
+// get api test
+
+Route::get('api/users', 'Api\UserController@index');
+Route::get('api/posts', 'Api\PostController@index');
