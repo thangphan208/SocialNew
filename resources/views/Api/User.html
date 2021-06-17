@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <link rel="stylesheet" href="vue (2).js" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+    </head>
+
+    <body>
+        <div id="app">
+            <h1>List of user</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Img</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in user ">
+                        <th scope="row">{{item.id}}</th>
+                        <td>{{item.name}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.avatar}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                user: [
+                    {
+                        id: 1,
+                        name: "nguyen van a",
+                        email: "nguyenvana@gmail.com",
+                        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgXWUMr_Vcw6KhaHLTy0SNSljgWrMIi5rFQ&usqp=CAU",
+                        avatar_original: null,
+                        created_at: "2021-04-29T06:41:51.000000Z",
+                        updated_at: "2021-04-29T06:41:51.000000Z",
+                        email_verified_at: null,
+                    },
+                    {
+                        id: 2,
+                        name: "nguyen van b",
+                        email: "nguyenvanb@gmail.com",
+                        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgXWUMr_Vcw6KhaHLTy0SNSljgWrMIi5rFQ&usqp=CAU",
+                        avatar_original: null,
+                        created_at: "2021-04-29T06:42:00.000000Z",
+                        updated_at: "2021-04-29T06:42:00.000000Z",
+                        email_verified_at: null,
+                    },
+                    {
+                        id: 3,
+                        name: "Nguyen Van C",
+                        email: "nguyenvanc@gmail.com",
+                        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgXWUMr_Vcw6KhaHLTy0SNSljgWrMIi5rFQ&usqp=CAU",
+                        avatar_original: null,
+                        created_at: "2021-04-29T06:42:07.000000Z",
+                        updated_at: "2021-04-29T06:42:07.000000Z",
+                        email_verified_at: null,
+                    },
+                    {
+                        id: 4,
+                        name: "Nguyen Van D",
+                        email: "nguyenvand@gmail.com",
+                        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkgXWUMr_Vcw6KhaHLTy0SNSljgWrMIi5rFQ&usqp=CAU",
+                        avatar_original: null,
+                        created_at: "2021-04-29T06:42:15.000000Z",
+                        updated_at: "2021-04-29T06:42:15.000000Z",
+                        email_verified_at: null,
+                    },
+                    {
+                        id: 8,
+                        name: "Phan Quang Thang",
+                        email: "pqthang208@gmail.com",
+                        avatar: "profile-1506810-1278719.png",
+                        avatar_original: null,
+                        created_at: "2021-05-04T09:09:48.000000Z",
+                        updated_at: "2021-05-04T09:09:48.000000Z",
+                        email_verified_at: null,
+                    },
+                ],
+            },
+            created() {
+                this.getListUser();
+            },
+            methods: {
+                getListUser() {
+                    fetch("")
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log(1);
+                        })
+                        .catch(function (error) {
+                            console.log(
+                                "Looks like there was a problem: \n",
+                                error
+                            );
+                        });
+                },
+            },
+            mounted() {},
+        });
+    </script>
+</html>

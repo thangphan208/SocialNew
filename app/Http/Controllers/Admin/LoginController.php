@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+
 class LoginController extends Controller
 {
     /*
@@ -28,7 +29,7 @@ class LoginController extends Controller
      * @var string
      */
 
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo = 'admin/home';
     /**
      * Create a new controller instance.
      *
@@ -66,8 +67,4 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect('admin/login');
     }
-
-
-
-
 }

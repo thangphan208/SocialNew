@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Controllers\User;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Controller;

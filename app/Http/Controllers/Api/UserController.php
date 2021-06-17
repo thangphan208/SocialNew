@@ -1,14 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-class RegisterController extends Controller
+class UserController extends Controller
 {
+    protected $userservice;
+
+    public function __construct(UserService $userservice)
+    {
+        $this->userservice = $userservice;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,9 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('admin.register');
+        $users = $this->userservice->all()->toArray();
+
+        return User::all();
     }
 
     /**
@@ -24,12 +32,9 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $data = $request->only('name', 'email', 'password');
-        $data['password'] = Hash::make($data['password']);
-        Admin::create($data);
-        return view('admin.login');
+        //
     }
 
     /**
